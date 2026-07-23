@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slice & Spice | Premium Pizza, Smoky Jollof & Drinks</title>
+    <!-- Tailwind CSS for modern styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        .hero-slide {
+            opacity: 0;
+            transition: opacity 1.2s ease-in-out;
+            position: absolute;
+            inset: 0;
+        }
+        .hero-slide.active {
+            opacity: 1;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        /* Custom Scrollbar for Cart */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased selection:bg-red-600 selection:text-white">
+
+    <!-- NAVIGATION BAR -->
+    <nav class="bg-white/90 backdrop-blur-md shadow-sm fixed top-0 left-0 right-0 z-50 border-b border-slate-100 transition-all">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20 items-center">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center space-x-2">
+                    <div class="w-10 h-10 bg-red-600 rounded-xl flex items-center justify-center text-white font-black text-xl shadow-md shadow-red-200">
+                        <i class="fa-solid fa-fire-flame-curved"></i>
+                    </div>
+                    <a href="#home" class="text-xl sm:text-2xl font-black tracking-tight text-slate-900">SLICE <span class="text-red-600">&</span> SPICE</a>
+                </div>
+
+                <!-- Navigation Links -->
+                <div class="hidden md:flex space-x-6 items-center font-semibold text-sm text-slate-600">
+                    <a href="#home" class="hover:text-red-600 transition">Home</a>
+                    <a href="#menu" class="hover:text-red-600 transition">Menu</a>
+                    <a href="#about" class="hover:text-red-600 transition">About</a>
+                    
+                    <!-- Our Team Dropdown -->
+                    <div class="relative group py-4">
+                        <button onclick="toggleTeamDropdown(event)" class="hover:text-red-600 transition flex items-center space-x-1 focus:outline-none">
+                            <span>Our Team</span>
+                            <i class="fa-solid fa-chevron-down text-xs"></i>
+                        </button>
+                        <div id="team-dropdown" class="hidden absolute top-full left-0 w-48 bg-white rounded-2xl shadow-xl border border-slate-100 py-3 space-y-1 z-50">
+                            <a href="#chief-chef-section" onclick="showChiefChefSection()" class="block px-4 py-2 text-slate-700 hover:bg-red-50 hover:text-red-600 transition font-semibold">Chief Chef</a>
+                            <a href="#our-staff-section" onclick="showStaffSection()" class="block px-4 py-2 text-slate-700 hover:bg-red-50 hover:text-red-600 transition font-semibold">Our Staff</a>
+                        </div>
+                    </div>
+
+                    <a href="#hours" class="hover:text-red-600 transition">Hours</a>
+                    <a href="#location" class="hover:text-red-600 transition flex items-center space-x-1.5"><i class="fa-solid fa-location-dot text-red-600"></i><span>Location</span></a>
+                    <a href="#contact" class="hover:text-red-600 transition">Contact</a>
+                    <a href="#booking" class="hover:text-red-600 transition">Book Appointment</a>
+                </div>
+
+                <!-- Right Side: Cart Logo & Mobile Menu Button -->
+                <div class="flex items-center space-x-4">
+                    <!-- Cart Button -->
+                    <button onclick="toggleCart()" class="relative bg-slate-100 hover:bg-slate-200 text-slate-700 w-12 h-12 rounded-2xl flex items-center justify-center transition focus:outline-none">
+                        <i class="fa-solid fa-cart-shopping text-lg"></i>
+                        <span id="cart-count" class="absolute -top-1.5 -right-1.5 bg-red-600 text-white text-xs font-bold w-6 h-6 rounded-full flex items-center justify-center shadow-md shadow-red-200">0</span>
+                    </button>
+
+                    <!-- Mobile Menu Button -->
+                    <div class="md:hidden flex items-center">
+                        <button onclick="toggleMobileMenu()" class="bg-slate-100 hover:bg-slate-200 text-slate-700 w-12 h-12 rounded-2xl flex items-center justify-center transition focus:outline-none">
+                            <i class="fa-solid fa-bars text-lg"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-slate-100 px-6 py-4 space-y-4 shadow-lg">
+            <a href="#home" onclick="toggleMobileMenu()" class="block text-slate-700 hover:text-red-600 font-semibold">Home</a>
+            <a href="#menu" onclick="toggleMobileMenu()" class="block text-slate-700 hover:text-red-600 font-semibold">Menu</a>
+            <a href="#about" onclick="toggleMobileMenu()" class="block text-slate-700 hover:text-red-600 font-semibold">About</a>
+            <div>
+                <button onclick="toggleMobileTeamDropdown()" class="w-full flex justify-between items-center text-slate-700 hover:text-red-600 font-semibold py-1">
+                    <span>Our Team</span>
+                    <i class="fa-solid fa-chevron-down text-xs"></i>
+                </button>
+                <div id="mobile-team-dropdown" class="hidden pl-4 py-2 space-y-2">
+                    <a href="#chief-chef-section" onclick="toggleMobileMenu(); showChiefChefSection();" class="block text-slate-600 hover:text-red-600 font-medium">Chief Chef</a>
+                    <a href="#our-staff-section" onclick="toggleMobileMenu(); showStaffSection();" class="block text-slate-600 hover:text-red-600 font-medium">Our Staff</a>
+                </div>
+            </div>
+            <a href="#hours" onclick="toggleMobileMenu()" class="block text-slate-700 hover:text-red-600 font-semibold">Hours</a>
+            <a href="#location" onclick="toggleMobileMenu()" class="block text-slate-700 hover:text-red-600 font-semibold flex items-center space-x-2"><i class="fa-solid fa-location-dot text-red-600"></i><span>Location</span></a>
+            <a href="#contact" onclick="toggleMobileMenu()" class="block text-slate-700 hover:text-red-600 font-semibold">Contact</a>
+            <a href="#booking" onclick="toggleMobileMenu()" class="block text-slate-700 hover:text-red-600 font-semibold">Book Appointment</a>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section id="home" class="relative h-screen flex items-center justify-center text-center overflow-hidden">
+        <!-- Slides -->
+        <div class="hero-slide active bg-cover bg-center" style="background-image: linear-gradient(rgba(15, 23, 42, 0.65), rgba(15, 23, 42, 0.65)), url('https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=1920&q=80');"></div>
+        <div class="hero-slide bg-cover bg-center" style="background-image: linear-gradient(rgba(15, 23, 42, 0.65), rgba(15, 23, 42, 0.65)), url('https://images.unsplash.com/photo-1589301760014-d929f3979dbc?auto=format&fit=crop&w=1920&q=80');"></div>
+        <div class="hero-slide bg-cover bg-center" style="background-image: linear-gradient(rgba(15, 23, 42, 0.65), rgba(15, 23, 42, 0.65)), url('https://images.unsplash.com/photo-1622483767028-3f66f32aef97?auto=format&fit=crop&w=1920&q=80');"></div>
+
+        <!-- Hero Content -->
+        <div class="relative z-10 max-w-4xl mx-auto px-4 text-white mt-12">
+            <span class="inline-block bg-red-600/90 text-white text-xs font-bold tracking-widest uppercase px-4 py-2 rounded-full mb-6 backdrop-blur-sm">Welcome to Slice & Spice</span>
+            <h1 class="text-4xl sm:text-6xl lg:text-7xl font-black mb-6 tracking-tight leading-tight">Masterpieces in Woodfired Pizza & Smoky Jollof</h1>
+            <p class="text-lg sm:text-xl text-slate-200 mb-10 font-normal max-w-2xl mx-auto">Experience culinary excellence with our artisan pizzas, flavorful party jollof bowls, and ice-cold refreshments.</p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="#menu" class="bg-red-600 hover:bg-red-700 text-white font-bold px-8 py-4 rounded-2xl shadow-xl shadow-red-600/30 transition transform hover:-translate-y-0.5">Explore Full Menu</a>
+                <a href="#booking" class="bg-white/10 hover:bg-white/25 backdrop-blur-md text-white border border-white/20 font-bold px-8 py-4 rounded-2xl transition">Book a Table</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- MENU SECTION -->
+    <section id="menu" class="py-24 px-4 max-w-7xl mx-auto">
+        <div class="text-center mb-16">
+            <span class="text-red-600 font-extrabold text-sm tracking-widest uppercase mb-2 block">Our Gastronomy</span>
+            <h2 class="text-3xl sm:text-5xl font-black text-slate-900 mb-4 tracking-tight">Explore Our Menu Selection</h2>
+            <p class="text-slate-500 max-w-xl mx-auto text-base">Choose your ideal sizes, custom varieties, and chilled beverages crafted precisely for your taste buds.</p>
+        </div>
+
+        <div class="space-y-20">
+            <!-- CATEGORY 1: PIZZAS -->
+            <div>
+                <div class="flex items-center space-x-3 mb-8">
+                    <div class="w-10 h-10 bg-red-50 text-red-600 rounded-xl flex items-center justify-center font-bold text-lg"><i class="fa-solid fa-pizza-slice"></i></div>
+                    <h3 class="text-2xl font-black text-slate-900 tracking-tight">Woodfired Pizzas (Sizes & Pricing)</h3>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Pizza 1 -->
+                    <div class="bg-white rounded-3xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-xl transition duration-300 flex flex-col justify-between group">
+                        <div class="relative overflow-hidden h-56">
+                            <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=600&q=80" alt="Pepperoni Pizza" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                            <span class="absolute top-4 right-4 bg-white/90 backdrop-blur-md text-slate-900 text-xs font-bold px-3 py-1.5 rounded-xl shadow-sm">Woodfired</span>
+                        </div>
+                        <div class="p-6 flex-1 flex flex-col justify-between">
+                            <div>
+                                <h4 class="text-xl font-bold text-slate-900 mb-1">Classic Pepperoni Pizza</h4>
+                                <p class="text-slate-500 text-sm mb-6 leading-relaxed">Double-layered pepperoni, premium mozzarella cheese, and rich organic tomato sauce.</p>
+                            </div>
+                            <div class="space-y-4">
+                                <div class="flex items-center justify-between bg-slate-50 p-3 rounded-2xl">
+                                    <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Select Size:</span>
+                                    <select id="pizza-1-size" class="bg-white border border-slate-200 rounded-xl px-3 py-1.5 text-sm font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-red-600">
+                                        <option value="Small" data-price="10.00">Small ($10.00)</option>
+                                        <option value="Medium" data-price="15.00" selected>Medium ($15.00)</option>
+                                        <option value="Large" data-price="22.00">Large ($22.00)</option>
+                                    </select>
+                                </div>
+                                <button onclick="addPizzaToCart('Classic Pepperoni Pizza', 'pizza-1-size')" class="w-full bg-slate-900 hover:bg-red-600 text-white font-bold py-3.5 rounded-2xl transition duration-200 shadow-sm flex items-center justify-center space-x-2">
+                                    <i class="fa-solid fa-plus text-xs"></i>
+                                    <span>Add to Cart</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pizza 2 -->
+                    <div class="bg-white rounded-3xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-xl transition duration-300 flex flex-col justify-between group">
+                        <div class="relative overflow-hidden h-56">
+                            <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=600&q=80" alt="Margherita Pizza" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                            <span class="absolute top-4 right-4 bg-white/90 backdrop-blur-md text-slate-900 text-xs font-bold px-3 py-1.5 rounded-xl shadow-sm">Woodfired</span>
+                        </div>
+                        <div class="p-6 flex-1 flex flex-col justify-between">
+                            <div>
+                                <h4 class="text-xl font-bold text-slate-900 mb-1">Margherita Pizza</h4>
+                                <p class="text-slate-500 text-sm mb-6 leading-relaxed">Fresh basil leaves, sliced organic tomatoes, extra virgin olive oil, and fresh mozzarella.</p>
+                            </div>
+                            <div class="space-y-4">
+                                <div class="flex items-center justify-between bg-slate-50 p-3 rounded-2xl">
+                                    <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Select Size:</span>
+                                    <select id="pizza-2-size" class="bg-white border border-slate-200 rounded-xl px-3 py-1.5 text-sm font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-red-600">
+                                        <option value="Small" data-price="8.00">Small ($8.00)</option>
+                                        <option value="Medium" data-price="12.00" selected>Medium ($12.00)</option>
+                                        <option value="Large" data-price="18.00">Large ($18.00)</option>
+                                    </select>
+                                </div>
+                                <button onclick="addPizzaToCart('Margherita Pizza', 'pizza-2-size')" class="w-full bg-slate-900 hover:bg-red-600 text-white font-bold py-3.5 rounded-2xl transition duration-200 shadow-sm flex items-center justify-center space-x-2">
+                                    <i class="fa-solid fa-plus text-xs"></i>
+                                    <span>Add to Cart</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pizza 3 -->
+                    <div class="bg-white rounded-3xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-xl transition duration-300 flex flex-col justify-between group">
+                        <div class="relative overflow-hidden h-56">
+                            <img src="https://images.unsplash.com/photo-1594007654729-407eedc4be65?auto=format&fit=crop&w=600&q=80" alt="BBQ Chicken Pizza" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                            <span class="absolute top-4 right-4 bg-white/90 backdrop-blur-md text-slate-900 text-xs font-bold px-3 py-1.5 rounded-xl shadow-sm">Woodfired</span>
+                        </div>
+                        <div class="p-6 flex-1 flex flex-col justify-between">
+                            <div>
+                                <h4 class="text-xl font-bold text-slate-900 mb-1">BBQ Chicken Pizza</h4>
+                                <p class="text-slate-500 text-sm mb-6 leading-relaxed">Tender grilled chicken chunks, smoky BBQ sauce drizzle, red onions, and fresh cilantro.</p>
+                            </div>
+                            <div class="space-y-4">
+                                <div class="flex items-center justify-between bg-slate-50 p-3 rounded-2xl">
+                                    <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Select Size:</span>
+                                    <select id="pizza-3-size" class="bg-white border border-slate-200 rounded-xl px-3 py-1.5 text-sm font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-red-600">
+                                        <option value="Small" data-price="11.00">Small ($11.00)</option>
+                                        <option value="Medium" data-price="16.00" selected>Medium ($16.00)</option>
+                                        <option value="Large" data-price="24.00">Large ($24.00)</option>
+                                    </select>
+                                </div>
+                                <button onclick="addPizzaToCart('BBQ Chicken Pizza', 'pizza-3-size')" class="w-full bg-slate-900 hover:bg-red-600 text-white font-bold py-3.5 rounded-2xl transition duration-200 shadow-sm flex items-center justify-center space-x-2">
+                                    <i class="fa-solid fa-plus text-xs"></i>
+                                    <span>Add to Cart</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CATEGORY 2: JOLLF RICE BOWLS -->
+            <div>
+                <div class="flex items-center space-x-3 mb-8">
+                    <div class="w-10 h-10 bg-red-50 text-red-600 rounded-xl flex items-center justify-center font-bold text-lg"><i class="fa-solid fa-bowl-food"></i></div>
+                    <h3 class="text-2xl font-black text-slate-900 tracking-tight">Smoky Jollof Rice Bowls (Bowl Sizes & Pricing)</h3>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Jollof 1 -->
+                    <div class="bg-white rounded-3xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-xl transition duration-300 flex flex-col justify-between group">
+                        <div class="relative overflow-hidden h-56">
+                            <img src="https://images.unsplash.com/photo-1589301760014-d929f3979dbc?auto=format&fit=crop&w=600&q=80" alt="Party Jollof" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                            <span class="absolute top-4 right-4 bg-white/90 backdrop-blur-md text-slate-900 text-xs font-bold px-3 py-1.5 rounded-xl shadow-sm">Chef Special</span>
+                        </div>
+                        <div class="p-6 flex-1 flex flex-col justify-between">
+                            <div>
+                                <h4 class="text-xl font-bold text-slate-900 mb-1">Signature Smoky Party Jollof</h4>
+                                <p class="text-slate-500 text-sm mb-6 leading-relaxed">Served alongside tender grilled chicken, sweet golden fried plantains, and rich shito sauce.</p>
+                            </div>
+                            <div class="space-y-4">
+                                <div class="flex items-center justify-between bg-slate-50 p-3 rounded-2xl">
+                                    <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Select Bowl:</span>
+                                    <select id="jollof-1-size" class="bg-white border border-slate-200 rounded-xl px-3 py-1.5 text-sm font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-red-600">
+                                        <option value="Regular Bowl" data-price="10.00">Regular Bowl ($10.00)</option>
+                                        <option value="Medium Bowl" data-price="14.00" selected>Medium Bowl ($14.00)</option>
+                                        <option value="Family Bowl" data-price="28.00">Family Bowl ($28.00)</option>
+                                    </select>
+                                </div>
+                                <button onclick="addJollofToCart('Signature Smoky Jollof', 'jollof-1-size')" class="w-full bg-slate-900 hover:bg-red-600 text-white font-bold py-3.5 rounded-2xl transition duration-200 shadow-sm flex items-center justify-center space-x-2">
+                                    <i class="fa-solid fa-plus text-xs"></i>
+                                    <span>Add to Cart</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Jollof 2 -->
+                    <div class="bg-white rounded-3xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-xl transition duration-300 flex flex-col justify-between group">
+                        <div class="relative overflow-hidden h-56">
+                            <img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=600&q=80" alt="Beef Jollof Combo" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                            <span class="absolute top-4 right-4 bg-white/90 backdrop-blur-md text-slate-900 text-xs font-bold px-3 py-1.5 rounded-xl shadow-sm">Chef Special</span>
+                        </div>
+                        <div class="p-6 flex-1 flex flex-col justify-between">
+                            <div>
+                                <h4 class="text-xl font-bold text-slate-900 mb-1">Jollof with Beef & Salad</h4>
+                                <p class="text-slate-500 text-sm mb-6 leading-relaxed">Smokey party jollof rice accompanied by succulent seasoned beef chunks and fresh garden salad.</p>
+                            </div>
+                            <div class="space-y-4">
+                                <div class="flex items-center justify-between bg-slate-50 p-3 rounded-2xl">
+                                    <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Select Bowl:</span>
+                                    <select id="jollof-2-size" class="bg-white border border-slate-200 rounded-xl px-3 py-1.5 text-sm font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-red-600">
+                                        <option value="Regular Bowl" data-price="12.00">Regular Bowl ($12.00)</option>
+                                        <option value="Medium Bowl" data-price="16.00" selected>Medium Bowl ($16.00)</option>
+                                        <option value="Family Bowl" data-price="32.00">Family Bowl ($32.00)</option>
+                                    </select>
+                                </div>
+                                <button onclick="addJollofToCart('Jollof with Beef & Salad', 'jollof-2-size')" class="w-full bg-slate-900 hover:bg-red-600 text-white font-bold py-3.5 rounded-2xl transition duration-200 shadow-sm flex items-center justify-center space-x-2">
+                                    <i class="fa-solid fa-plus text-xs"></i>
+                                    <span>Add to Cart</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CATEGORY 3: SOFT DRINKS & BEVERAGES -->
+            <div>
+                <div class="flex items-center space-x-3 mb-8">
+                    <div class="w-10 h-10 bg-red-50 text-red-600 rounded-xl flex items-center justify-center font-bold text-lg"><i class="fa-solid fa-champagne-glasses"></i></div>
+                    <h3 class="text-2xl font-black text-slate-900 tracking-tight">Soft Drinks & Beverages</h3>
+                </div>
+                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-4">
+                    <!-- Coca Cola -->
+                    <div class="bg-white rounded-3xl shadow-sm border border-slate-100 hover:shadow-md p-5 text-center flex flex-col justify-between group transition">
+                        <div>
+                            <div class="w-14 h-14 bg-red-50 text-red-600 rounded-2xl flex items-center justify-center mx-auto mb-4 text-xl group-hover:scale-110 transition">
+                                <i class="fa-solid fa-bottle-water"></i>
+                            </div>
+                            <h5 class="font-bold text-slate-900 text-sm mb-1">Coca Cola</h5>
+                            <span class="text-red-600 font-extrabold text-sm">$2.50</span>
+                        </div>
+                        <button onclick="addToCart('Coca Cola', 2.50)" class="mt-5 w-full bg-slate-100 hover:bg-red-600 hover:text-white text-slate-700 text-xs font-bold py-2.5 rounded-xl transition">Add</button>
+                    </div>
+
+                    <!-- Mirinda -->
+                    <div class="bg-white rounded-3xl shadow-sm border border-slate-100 hover:shadow-md p-5 text-center flex flex-col justify-between group transition">
+                        <div>
+                            <div class="w-14 h-14 bg-orange-50 text-orange-500 rounded-2xl flex items-center justify-center mx-auto mb-4 text-xl group-hover:scale-110 transition">
+                                <i class="fa-solid fa-bottle-water"></i>
+                            </div>
+                            <h5 class="font-bold text-slate-900 text-sm mb-1">Mirinda</h5>
+                            <span class="text-red-600 font-extrabold text-sm">$2.50</span>
+                        </div>
+                        <button onclick="addToCart('Mirinda', 2.50)" class="mt-5 w-full bg-slate-100 hover:bg-red-600 hover:text-white text-slate-700 text-xs font-bold py-2.5 rounded-xl transition">Add</button>
+                    </div>
+
+                    <!-- Fanta -->
+                    <div class="bg-white rounded-3xl shadow-sm border border-slate-100 hover:shadow-md p-5 text-center flex flex-col justify-between group transition">
+                        <div>
+                            <div class="w-14 h-14 bg-yellow-50 text-yellow-500 rounded-2xl flex items-center justify-center mx-auto mb-4 text-xl group-hover:scale-110 transition">
+                                <i class="fa-solid fa-bottle-water"></i>
+                            </div>
+                            <h5 class="font-bold text-slate-900 text-sm mb-1">Fanta</h5>
+                            <span class="text-red-600 font-extrabold text-sm">$2.50</span>
+                        </div>
+                        <button onclick="addToCart('Fanta', 2.50)" class="mt-5 w-full bg-slate-100 hover:bg-red-600 hover:text-white text-slate-700 text-xs font-bold py-2.5 rounded-xl transition">Add</button>
+                    </div>
+
+                    <!-- Sprite -->
+                    <div class="bg-white rounded-3xl shadow-sm border border-slate-100 hover:shadow-md p-5 text-center flex flex-col justify-between group transition">
+                        <div>
+                            <div class="w-14 h-14 bg-green-50 text-green-600 rounded-2xl flex items-center justify-center mx-auto mb-4 text-xl group-hover:scale-110 transition">
+                                <i class="fa-solid fa-bottle-water"></i>
+                            </div>
+                            <h5 class="font-bold text-slate-900 text-sm mb-1">Sprite</h5>
+                            <span class="text-red-600 font-extrabold text-sm">$2.50</span>
+                        </div>
+                        <button onclick="addToCart('Sprite', 2.50)" class="mt-5 w-full bg-slate-100 hover:bg-red-600 hover:text-white text-slate-700 text-xs font-bold py-2.5 rounded-xl transition">Add</button>
+                    </div>
+
+                    <!-- Alvaro -->
+                    <div class="bg-white rounded-3xl shadow-sm border border-slate-100 hover:shadow-md p-5 text-center flex flex-col justify-between group transition">
+                        <div>
+                            <div class="w-14 h-14 bg-amber-50 text-amber-700 rounded-2xl flex items-center justify-center mx-auto mb-4 text-xl group-hover:scale-110 transition">
+                                <i class="fa-solid fa-bottle-water"></i>
+                            </div>
+                            <h5 class="font-bold text-slate-900 text-sm mb-1">Alvaro</h5>
+                            <span class="text-red-600 font-extrabold text-sm">$2.50</span>
+                        </div>
+                        <button onclick="addToCart('Alvaro', 2.50)" class="mt-5 w-full bg-slate-100 hover:bg-red-600 hover:text-white text-slate-700 text-xs font-bold py-2.5 rounded-xl transition">Add</button>
+                    </div>
+
+                    <!-- Punch -->
+                    <div class="bg-white rounded-3xl shadow-sm border border-slate-100 hover:shadow-md p-5 text-center flex flex-col justify-between group transition">
+                        <div>
+                            <div class="w-14 h-14 bg-purple-50 text-purple-600 rounded-2xl flex items-center justify-center mx-auto mb-4 text-xl group-hover:scale-110 transition">
+                                <i class="fa-solid fa-bottle-water"></i>
+                            </div>
+                            <h5 class="font-bold text-slate-900 text-sm mb-1">Punch</h5>
+                            <span class="text-red-600 font-extrabold text-sm">$2.50</span>
+                        </div>
+                        <button onclick="addToCart('Punch', 2.50)" class="mt-5 w-full bg-slate-100 hover:bg-red-600 hover:text-white text-slate-700 text-xs font-bold py-2.5 rounded-xl transition">Add</button>
+                    </div>
+
+                    <!-- Mineral Water -->
+                    <div class="bg-white rounded-3xl shadow-sm border border-slate-100 hover:shadow-md p-5 text-center flex flex-col justify-between group transition">
+                        <div>
+                            <div class="w-14 h-14 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-4 text-xl group-hover:scale-110 transition">
+                                <i class="fa-solid fa-glass-water"></i>
+                            </div>
+                            <h5 class="font-bold text-slate-900 text-sm mb-1">Mineral Water</h5>
+                            <span class="text-red-600 font-extrabold text-sm">$1.50</span>
+                        </div>
+                        <button onclick="addToCart('Mineral Water', 1.50)" class="mt-5 w-full bg-slate-100 hover:bg-red-600 hover:text-white text-slate-700 text-xs font-bold py-2.5 rounded-xl transition">Add</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CHIEF CHEF PRODUCTS SECTION (Hidden by default, shown on click) -->
+    <section id="chief-chef-section" class="hidden py-24 px-4 max-w-7xl mx-auto bg-slate-50 border-t border-slate-100">
+        <div class="text-center mb-16">
+            <span class="text-red-600 font-extrabold text-sm tracking-widest uppercase mb-2 block">Master Selection</span>
+            <h2 class="text-3xl sm:text-5xl font-black text-slate-900 mb-4 tracking-tight">Chief Chef's Special Creations</h2>
+            <p class="text-slate-500 max-w-xl mx-auto text-base">Hand-crafted signature specialties personally developed and prepared by our Executive Head Chef.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Chef Product 1 -->
+            <div class="bg-white rounded-3xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-xl transition duration-300 flex flex-col justify-between group">
+                <div class="relative overflow-hidden h-56">
+                    <img src="https://images.unsplash.com/photo-1574071318508-1cdbab80d002?auto=format&fit=crop&w=600&q=80" alt="Chef Truffle Pizza" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    <span class="absolute top-4 right-4 bg-red-600 text-white text-xs font-bold px-3 py-1.5 rounded-xl shadow-sm">Chef's Masterpiece</span>
+                </div>
+                <div class="p-6 flex-1 flex flex-col justify-between">
+                    <div>
+                        <h4 class="text-xl font-bold text-slate-900 mb-1">Chef's Signature Truffle Pizza</h4>
+                        <p class="text-slate-500 text-sm mb-6 leading-relaxed">Infused with black truffle oil, wild forest mushrooms, aged parmesan flakes, and creamy fior di latte.</p>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between bg-slate-50 p-3 rounded-2xl">
+                            <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Price:</span>
+                            <span class="text-red-600 font-extrabold text-base">$26.00</span>
+                        </div>
+                        <button onclick="addToCart('Chef Signature Truffle Pizza', 26.00)" class="w-full bg-slate-900 hover:bg-red-600 text-white font-bold py-3.5 rounded-2xl transition duration-200 shadow-sm flex items-center justify-center space-x-2">
+                            <i class="fa-solid fa-plus text-xs"></i>
+                            <span>Add to Cart</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chef Product 2 -->
+            <div class="bg-white rounded-3xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-xl transition duration-300 flex flex-col justify-between group">
+                <div class="relative overflow-hidden h-56">
+                    <img src="https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=600&q=80" alt="Chef Fire Jollof" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    <span class="absolute top-4 right-4 bg-red-600 text-white text-xs font-bold px-3 py-1.5 rounded-xl shadow-sm">Chef's Masterpiece</span>
+                </div>
+                <div class="p-6 flex-1 flex flex-col justify-between">
+                    <div>
+                        <h4 class="text-xl font-bold text-slate-900 mb-1">Executive Smoked Lamb Jollof</h4>
+                        <p class="text-slate-500 text-sm mb-6 leading-relaxed">Slow-braised tender smoked lamb shoulder served over aromatic fire-roasted party jollof rice.</p>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between bg-slate-50 p-3 rounded-2xl">
+                            <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Price:</span>
+                            <span class="text-red-600 font-extrabold text-base">$30.00</span>
+                        </div>
+                        <button onclick="addToCart('Executive Smoked Lamb Jollof', 30.00)" class="w-full bg-slate-900 hover:bg-red-600 text-white font-bold py-3.5 rounded-2xl transition duration-200 shadow-sm flex items-center justify-center space-x-2">
+                            <i class="fa-solid fa-plus text-xs"></i>
+                            <span>Add to Cart</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chef Product 3 -->
+            <div class="bg-white rounded-3xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-xl transition duration-300 flex flex-col justify-between group">
+                <div class="relative overflow-hidden h-56">
+                    <img src="https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&w=600&q=80" alt="Chef Cocktail" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    <span class="absolute top-4 right-4 bg-red-600 text-white text-xs font-bold px-3 py-1.5 rounded-xl shadow-sm">Chef's Masterpiece</span>
+                </div>
+                <div class="p-6 flex-1 flex flex-col justify-between">
+                    <div>
+                        <h4 class="text-xl font-bold text-slate-900 mb-1">Sunset Paradise Mocktail</h4>
+                        <p class="text-slate-500 text-sm mb-6 leading-relaxed">A refreshing artisan blend of passionfruit, fresh mint, lime juice, and sparkling club soda.</p>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between bg-slate-50 p-3 rounded-2xl">
+                            <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Price:</span>
+                            <span class="text-red-600 font-extrabold text-base">$6.50</span>
+                        </div>
+                        <button onclick="addToCart('Sunset Paradise Mocktail', 6.50)" class="w-full bg-slate-900 hover:bg-red-600 text-white font-bold py-3.5 rounded-2xl transition duration-200 shadow-sm flex items-center justify-center space-x-2">
+                            <i class="fa-solid fa-plus text-xs"></i>
+                            <span>Add to Cart</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- OUR STAFF SECTION (Hidden by default, shown on click) -->
+    <section id="our-staff-section" class="hidden py-24 px-4 max-w-7xl mx-auto bg-slate-50 border-t border-slate-100">
+        <div class="text-center mb-16">
+            <span class="text-red-600 font-extrabold text-sm tracking-widest uppercase mb-2 block">Meet The Experts</span>
+            <h2 class="text-3xl sm:text-5xl font-black text-slate-900 mb-4 tracking-tight">Our Dedicated Staff Members</h2>
+            <p class="text-slate-500 max-w-xl mx-auto text-base">The passionate professionals behind every delicious meal and great customer experience.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Staff Card 1 -->
+            <div class="bg-white rounded-3xl shadow-sm border border-slate-100 overflow-hidden text-center p-8 hover:shadow-xl transition duration-300">
+                <img src="https://images.unsplash.com/photo-1577219491135-ce391730fb2c?auto=format&fit=crop&w=400&q=80" alt="Chef Kofi Mensah" class="w-32 h-32 object-cover rounded-full mx-auto mb-6 shadow-md border-4 border-red-50">
+                <h3 class="text-xl font-bold text-slate-900 mb-1">Chef Kofi Mensah</h3>
+                <span class="inline-block bg-red-50 text-red-600 text-xs font-bold px-3 py-1 rounded-full mb-4">Executive Chief Chef</span>
+                <p class="text-slate-500 text-sm leading-relaxed">With over 12 years of mastery in woodfired Italian baking and authentic West African cuisine.</p>
+            </div>
+
+            <!-- Staff Card 2 -->
+            <div class="bg-white rounded-3xl shadow-sm border border-slate-100 overflow-hidden text-center p-8 hover:shadow-xl transition duration-300">
+                <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=400&q=80" alt="Abena Osei" class="w-32 h-32 object-cover rounded-full mx-auto mb-6 shadow-md border-4 border-red-50">
+                <h3 class="text-xl font-bold text-slate-900 mb-1">Abena Osei</h3>
+                <span class="inline-block bg-red-50 text-red-600 text-xs font-bold px-3 py-1 rounded-full mb-4">Operations & Customer Relations</span>
+                <p class="text-slate-500 text-sm leading-relaxed">Ensuring seamless restaurant services, prompt deliveries, and exceptional guest satisfaction.</p>
+            </div>
+
+            <!-- Staff Card 3 -->
+            <div class="bg-white rounded-3xl shadow-sm border border-slate-100 overflow-hidden text-center p-8 hover:shadow-xl transition duration-300">
+                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80" alt="Ama Serwaa" class="w-32 h-32 object-cover rounded-full mx-auto mb-6 shadow-md border-4 border-red-50">
+                <h3 class="text-xl font-bold text-slate-900 mb-1">Ama Serwaa</h3>
+                <span class="inline-block bg-red-50 text-red-600 text-xs font-bold px-3 py-1 rounded-full mb-4">Lead Pastry & Pizzaiolo</span>
+                <p class="text-slate-500 text-sm leading-relaxed">Expert in crafting perfect dough textures, artisan toppings, and delectable woodfired crusts.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section id="about" class="bg-white py-24 px-4 border-y border-slate-100">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+            <div class="relative">
+                <div class="absolute -inset-4 bg-red-600/10 rounded-[2.5rem] -rotate-2"></div>
+                <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=800&q=80" alt="Restaurant Interior" class="relative rounded-3xl shadow-xl w-full object-cover h-[450px]">
+            </div>
+            <div>
+                <span class="text-red-600 font-extrabold text-sm tracking-widest uppercase mb-2 block">Our Heritage</span>
+                <h2 class="text-3xl sm:text-4xl font-black text-slate-900 mb-6 tracking-tight">About Slice & Spice</h2>
+                <p class="text-slate-600 mb-4 leading-relaxed text-base">Welcome to Slice & Spice, where culinary artistry meets unmatched flavor! Founded with a clear vision to serve authentic comfort foods, we specialize in wood-fired artisan pizzas and aromatic smoky party jollof prepared with top-tier local and imported ingredients.</p>
+                <p class="text-slate-600 mb-8 leading-relaxed text-base">Whether you are joining us for a cozy indoor dinner, hosting a family gathering, or ordering quick deliveries straight to your doorstep, our commitment to exceptional quality shines in every single bite.</p>
+                <div class="grid grid-cols-2 gap-6">
+                    <div class="bg-slate-50 p-6 rounded-3xl border border-slate-100">
+                        <h4 class="text-3xl font-black text-red-600 mb-1">100%</h4>
+                        <p class="text-sm font-semibold text-slate-600">Authentic Ingredients</p>
+                    </div>
+                    <div class="bg-slate-50 p-6 rounded-3xl border border-slate-100">
+                        <h4 class="text-3xl font-black text-red-600 mb-1">Fast</h4>
+                        <p class="text-sm font-semibold text-slate-600">WhatsApp Ordering</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- HOURS SECTION -->
+    <section id="hours" class="py-24 px-4 max-w-4xl mx-auto">
+        <div class="bg-white rounded-[2.5rem] shadow-xl border border-slate-100 p-8 sm:p-14 text-center">
+            <div class="flex items-center justify-center space-x-2 mb-2">
+                <span id="status-badge" class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold bg-emerald-50 text-emerald-700 border border-emerald-200 shadow-sm">
+                    <span id="status-dot" class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                    <span id="status-text">We're Open Now - Active</span>
+                </span>
+            </div>
+            <span class="text-red-600 font-extrabold text-sm tracking-widest uppercase mb-2 block">Opening Times</span>
+            <h2 class="text-3xl font-black text-slate-900 mb-6 tracking-tight">Working Hours</h2>
+            <div class="max-w-md mx-auto space-y-4 text-left">
+                <div class="flex justify-between items-center bg-slate-50 p-4 rounded-2xl border border-slate-100">
+                    <span class="font-bold text-slate-700">Monday – Thursday</span>
+                    <span class="font-semibold text-red-600">10:00 AM – 10:00 PM</span>
+                </div>
+                <div class="flex justify-between items-center bg-slate-50 p-4 rounded-2xl border border-slate-100">
+                    <span class="font-bold text-slate-700">Friday – Saturday</span>
+                    <span class="font-semibold text-red-600">10:00 AM – 11:30 PM</span>
+                </div>
+                <div class="flex justify-between items-center bg-slate-50 p-4 rounded-2xl border border-slate-100">
+                    <span class="font-bold text-slate-700">Sunday</span>
+                    <span class="font-semibold text-red-600">12:00 PM – 10:00 PM</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LOCATION SECTION -->
+    <section id="location" class="bg-white py-24 px-4 border-y border-slate-100">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+            <div>
+                <span class="text-red-600 font-extrabold text-sm tracking-widest uppercase mb-2 block">Visit Us</span>
+                <h2 class="text-3xl sm:text-4xl font-black text-slate-900 mb-6 tracking-tight">Come Visit Our Restaurant</h2>
+                <p class="text-slate-600 mb-6 leading-relaxed text-base">We love hosting our guests! Visit our flagship restaurant located right at Buduburam GPRTU station in the Central Region for an unforgettable dining experience, fresh woodfired pizzas, and warm hospitality.</p>
+                
+                <div class="flex items-center space-x-5 mb-8">
+                    <div class="w-14 h-14 bg-red-50 text-red-600 rounded-2xl flex items-center justify-center text-xl flex-shrink-0"><i class="fa-solid fa-location-dot"></i></div>
+                    <div>
+                        <h4 class="font-bold text-slate-900 text-lg">Main Restaurant</h4>
+                        <p class="text-slate-600 font-semibold">Central Region - Buduburam - GPRTU</p>
+                    </div>
+                </div>
+
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <a href="https://www.google.com/maps/search/?api=1&query=Buduburam+GPRTU+Central+Region+Ghana" target="_blank" class="inline-flex items-center justify-center space-x-2 bg-red-600 hover:bg-red-700 text-white font-bold px-8 py-4 rounded-2xl shadow-xl shadow-red-600/30 transition">
+                        <i class="fa-solid fa-map-location-dot"></i>
+                        <span>Get Directions</span>
+                    </a>
+                    <a href="#booking" class="inline-flex items-center justify-center space-x-2 bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold px-8 py-4 rounded-2xl transition">
+                        <i class="fa-solid fa-calendar-check text-red-600"></i>
+                        <span>Book a Table to Visit</span>
+                    </a>
+                </div>
+            </div>
+            <div class="relative">
+                <div class="absolute -inset-4 bg-red-600/10 rounded-[2.5rem] rotate-2"></div>
+                <div class="relative rounded-3xl shadow-xl w-full h-[400px] bg-slate-200 overflow-hidden">
+                    <iframe width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3970.824775956799!2d-0.455!3d5.533!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sNsKwMzInMDAuMCJOIDAbMjcnMTguMCJX!5e0!3m2!1sen!2sgh!4v1650000000000!5m2!1sen!2sgh"></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- BOOK APPOINTMENT / TABLE SECTION -->
+    <section id="booking" class="py-24 px-4 max-w-4xl mx-auto">
+        <div class="bg-white rounded-[2.5rem] shadow-xl border border-slate-100 p-8 sm:p-14">
+            <div class="text-center mb-12">
+                <span class="text-red-600 font-extrabold text-sm tracking-widest uppercase mb-2 block">Reservations</span>
+                <h2 class="text-3xl font-black text-slate-900 mb-3 tracking-tight">Book a Table / Appointment</h2>
+                <p class="text-slate-500">Fill out your details below to instantly receive your reservation summary and send it directly via WhatsApp.</p>
+            </div>
+            
+            <!-- Details Preview Box (Hidden until filled or populated live) -->
+            <div id="booking-preview-card" class="mb-8 p-6 bg-slate-50 border border-slate-200 rounded-2xl hidden">
+                <h3 class="font-bold text-slate-900 text-base mb-3 flex items-center space-x-2">
+                    <i class="fa-solid fa-receipt text-red-600"></i>
+                    <span>Reservation Summary Preview</span>
+                </h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm text-slate-600">
+                    <p><strong>Name:</strong> <span id="prev-name" class="text-slate-900">-</span></p>
+                    <p><strong>Phone:</strong> <span id="prev-phone" class="text-slate-900">-</span></p>
+                    <p><strong>Date:</strong> <span id="prev-date" class="text-slate-900">-</span></p>
+                    <p><strong>Time:</strong> <span id="prev-time" class="text-slate-900">-</span></p>
+                </div>
+                <p class="mt-3 text-xs text-slate-500"><strong>Requests:</strong> <span id="prev-notes" class="text-slate-700">None</span></p>
+            </div>
+
+            <form onsubmit="bookAppointment(event)" class="space-y-6">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">Full Name</label>
+                        <input type="text" id="book-name" required placeholder="John Doe" oninput="updateBookingPreview()" class="w-full px-5 py-4 bg-slate-50 border border-slate-200 rounded-2xl focus:ring-2 focus:ring-red-600 focus:outline-none font-medium text-slate-800">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">Phone Number</label>
+                        <input type="tel" id="book-phone" required placeholder="0539847422" oninput="updateBookingPreview()" class="w-full px-5 py-4 bg-slate-50 border border-slate-200 rounded-2xl focus:ring-2 focus:ring-red-600 focus:outline-none font-medium text-slate-800">
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">Date</label>
+                        <input type="date" id="book-date" required oninput="updateBookingPreview()" class="w-full px-5 py-4 bg-slate-50 border border-slate-200 rounded-2xl focus:ring-2 focus:ring-red-600 focus:outline-none font-medium text-slate-800">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">Time</label>
+                        <input type="time" id="book-time" required oninput="updateBookingPreview()" class="w-full px-5 py-4 bg-slate-50 border border-slate-200 rounded-2xl focus:ring-2 focus:ring-red-600 focus:outline-none font-medium text-slate-800">
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">Number of Guests / Special Request</label>
+                    <textarea id="book-notes" rows="3" placeholder="e.g. Table for 4, anniversary celebration" oninput="updateBookingPreview()" class="w-full px-5 py-4 bg-slate-50 border border-slate-200 rounded-2xl focus:ring-2 focus:ring-red-600 focus:outline-none font-medium text-slate-800"></textarea>
+                </div>
+                <button type="submit" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-4 rounded-2xl shadow-xl shadow-green-600/20 transition duration-200 flex items-center justify-center space-x-3 text-base">
+                    <i class="fa-brands fa-whatsapp text-2xl"></i>
+                    <span>Submit</span>
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section id="contact" class="bg-white py-24 px-4 border-t border-slate-100">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16">
+            <div>
+                <span class="text-red-600 font-extrabold text-sm tracking-widest uppercase mb-2 block">Communication</span>
+                <h2 class="text-3xl font-black text-slate-900 mb-6 tracking-tight">Get in Touch</h2>
+                <p class="text-slate-600 mb-8 leading-relaxed">Have inquiries, catering requests, or feedback? Reach out to us directly through phone, WhatsApp, or drop by our location.</p>
+                <div class="space-y-6">
+                    <div class="flex items-center space-x-5">
+                        <div class="w-14 h-14 bg-red-50 text-red-600 rounded-2xl flex items-center justify-center text-xl flex-shrink-0"><i class="fa-solid fa-phone"></i></div>
+                        <div>
+                            <h4 class="font-bold text-slate-900 text-lg">Call / WhatsApp</h4>
+                            <p class="text-slate-600 font-semibold">0539847422</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-5">
+                        <div class="w-14 h-14 bg-red-50 text-red-600 rounded-2xl flex items-center justify-center text-xl flex-shrink-0"><i class="fa-solid fa-location-dot"></i></div>
+                        <div>
+                            <h4 class="font-bold text-slate-900 text-lg">Location</h4>
+                            <p class="text-slate-600 font-semibold">Central region - Buduburam - GPRTU</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="bg-slate-50 rounded-[2.5rem] p-8 sm:p-10 border border-slate-100 shadow-sm">
+                    <h3 class="text-xl font-bold text-slate-900 mb-6">Send Us a Message</h3>
+                    <form onsubmit="sendContactMessage(event)" class="space-y-5">
+                        <input type="text" id="contact-name" placeholder="Your Name" required class="w-full px-5 py-4 bg-white border border-slate-200 rounded-2xl focus:ring-2 focus:ring-red-600 focus:outline-none font-medium">
+                        <input type="email" id="contact-email" placeholder="Your Email" required class="w-full px-5 py-4 bg-white border border-slate-200 rounded-2xl focus:ring-2 focus:ring-red-600 focus:outline-none font-medium">
+                        <textarea id="contact-msg" rows="4" placeholder="Your Message" required class="w-full px-5 py-4 bg-white border border-slate-200 rounded-2xl focus:ring-2 focus:ring-red-600 focus:outline-none font-medium"></textarea>
+                        <button type="submit" class="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-4 rounded-2xl transition shadow-sm">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-slate-900 text-white py-16 px-4">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+            <div class="text-center md:text-left">
+                <div class="flex items-center justify-center md:justify-start space-x-2 mb-3">
+                    <div class="w-8 h-8 bg-red-600 rounded-xl flex items-center justify-center text-white font-black text-sm">
+                        <i class="fa-solid fa-fire-flame-curved"></i>
+                    </div>
+                    <span class="text-xl font-black tracking-tight">SLICE <span class="text-red-600">&</span> SPICE</span>
+                </div>
+                <p class="text-slate-400 text-sm">Serving world-class pizzas, jollof, and cold drinks.</p>
+            </div>
+            <div class="flex space-x-5 text-xl">
+                <a href="tel:0539847422" class="w-12 h-12 bg-slate-800 hover:bg-red-600 rounded-2xl flex items-center justify-center text-slate-300 hover:text-white transition"><i class="fa-solid fa-phone text-sm"></i></a>
+                <a href="https://wa.me/233539847422" class="w-12 h-12 bg-slate-800 hover:bg-green-600 rounded-2xl flex items-center justify-center text-slate-300 hover:text-white transition"><i class="fa-brands fa-whatsapp text-sm"></i></a>
+                <a href="#contact" class="w-12 h-12 bg-slate-800 hover:bg-red-600 rounded-2xl flex items-center justify-center text-slate-300 hover:text-white transition"><i class="fa-solid fa-envelope text-sm"></i></a>
+            </div>
+            <p class="text-slate-500 text-sm">&copy; 2026 Slice & Spice. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- CART SIDEBAR MODAL -->
+    <div id="cart-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex justify-end transition-opacity">
+        <div class="bg-white w-full max-w-md h-full flex flex-col p-6 sm:p-8 shadow-2xl">
+            <div class="flex justify-between items-center border-b border-slate-100 pb-5">
+                <div class="flex items-center space-x-2">
+                    <i class="fa-solid fa-cart-shopping text-red-600"></i>
+                    <h3 class="text-xl font-black text-slate-900 tracking-tight">Your Cart</h3>
+                </div>
+                <button onclick="toggleCart()" class="w-10 h-10 bg-slate-100 hover:bg-slate-200 rounded-full flex items-center justify-center text-slate-600 font-bold transition">&times;</button>
+            </div>
+            <div id="cart-items" class="flex-1 overflow-y-auto py-6 space-y-4">
+                <p class="text-slate-400 text-center py-12 text-sm font-medium">Your cart is currently empty.</p>
+            </div>
+            <div class="border-t border-slate-100 pt-6">
+                <div class="flex justify-between items-center mb-6">
+                    <span class="font-bold text-slate-600">Total Amount:</span>
+                    <span id="cart-total" class="font-black text-2xl text-red-600">$0.00</span>
+                </div>
+                <button onclick="checkoutWhatsApp()" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-4 rounded-2xl shadow-xl shadow-green-600/20 transition flex items-center justify-center space-x-3 text-base">
+                    <i class="fa-brands fa-whatsapp text-2xl"></i>
+                    <span>Order Now via WhatsApp</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // Hero background slider (changes every 3 seconds)
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.hero-slide');
+        setInterval(() => {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }, 3000);
+
+        // Mobile Menu Toggle
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        // Team Dropdown Toggles
+        function toggleTeamDropdown(event) {
+            event.stopPropagation();
+            const dropdown = document.getElementById('team-dropdown');
+            dropdown.classList.toggle('hidden');
+        }
+
+        function toggleMobileTeamDropdown() {
+            const dropdown = document.getElementById('mobile-team-dropdown');
+            dropdown.classList.toggle('hidden');
+        }
+
+        // Hide dropdowns on outside click
+        window.addEventListener('click', function() {
+            const dropdown = document.getElementById('team-dropdown');
+            if (dropdown && !dropdown.classList.contains('hidden')) {
+                dropdown.classList.add('hidden');
+            }
+        });
+
+        // Show/Hide Chief Chef and Staff Sections
+        function showChiefChefSection() {
+            const chiefSection = document.getElementById('chief-chef-section');
+            const staffSection = document.getElementById('our-staff-section');
+            
+            chiefSection.classList.remove('hidden');
+            staffSection.classList.add('hidden');
+            chiefSection.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function showStaffSection() {
+            const chiefSection = document.getElementById('chief-chef-section');
+            const staffSection = document.getElementById('our-staff-section');
+            
+            staffSection.classList.remove('hidden');
+            chiefSection.classList.add('hidden');
+            staffSection.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Forced "We Are Currently Open" Status
+        function checkOperatingStatus() {
+            const badge = document.getElementById('status-badge');
+            const dot = document.getElementById('status-dot');
+            const text = document.getElementById('status-text');
+
+            badge.className = "inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold bg-emerald-50 text-emerald-700 border border-emerald-200 shadow-sm";
+            dot.className = "w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse";
+            text.textContent = "We're Open Now - Active";
+        }
+
+        // Run on load
+        checkOperatingStatus();
+
+        // Live Booking Preview Update
+        function updateBookingPreview() {
+            const name = document.getElementById('book-name').value;
+            const phone = document.getElementById('book-phone').value;
+            const date = document.getElementById('book-date').value;
+            const time = document.getElementById('book-time').value;
+            const notes = document.getElementById('book-notes').value;
+
+            const previewCard = document.getElementById('booking-preview-card');
+
+            if (name || phone || date || time || notes) {
+                previewCard.classList.remove('hidden');
+                document.getElementById('prev-name').textContent = name || '-';
+                document.getElementById('prev-phone').textContent = phone || '-';
+                document.getElementById('prev-date').textContent = date || '-';
+                document.getElementById('prev-time').textContent = time || '-';
+                document.getElementById('prev-notes').textContent = notes || 'None';
+            } else {
+                previewCard.classList.add('hidden');
+            }
+        }
+
+        // Cart Data Structure
+        let cart = [];
+
+        function toggleCart() {
+            const modal = document.getElementById('cart-modal');
+            modal.classList.toggle('hidden');
+        }
+
+        function addToCart(name, price) {
+            const existingItem = cart.find(item => item.name === name);
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({ name, price, quantity: 1 });
+            }
+            updateCartUI();
+        }
+
+        function addPizzaToCart(pizzaName, selectId) {
+            const selectElement = document.getElementById(selectId);
+            const selectedOption = selectElement.options[selectElement.selectedIndex];
+            const size = selectedOption.value;
+            const price = parseFloat(selectedOption.getAttribute('data-price'));
+            
+            const fullName = `${pizzaName} (${size})`;
+            addToCart(fullName, price);
+        }
+
+        function addJollofToCart(jollofName, selectId) {
+            const selectElement = document.getElementById(selectId);
+            const selectedOption = selectElement.options[selectElement.selectedIndex];
+            const size = selectedOption.value;
+            const price = parseFloat(selectedOption.getAttribute('data-price'));
+            
+            const fullName = `${jollofName} - ${size}`;
+            addToCart(fullName, price);
+        }
+
+        function updateCartUI() {
+            const cartItemsContainer = document.getElementById('cart-items');
+            const cartCount = document.getElementById('cart-count');
+            const cartTotal = document.getElementById('cart-total');
+
+            let totalCount = 0;
+            let totalPrice = 0;
+
+            if (cart.length === 0) {
+                cartItemsContainer.innerHTML = '<p class="text-slate-400 text-center py-12 text-sm font-medium">Your cart is currently empty.</p>';
+            } else {
+                cartItemsContainer.innerHTML = '';
+                cart.forEach((item, index) => {
+                    totalCount += item.quantity;
+                    totalPrice += item.price * item.quantity;
+
+                    cartItemsContainer.innerHTML += `
+                        <div class="flex justify-between items-center bg-slate-50 p-4 rounded-2xl border border-slate-100">
+                            <div>
+                                <h4 class="font-bold text-slate-900 text-sm mb-0.5">${item.name}</h4>
+                                <p class="text-xs font-semibold text-red-600">$${item.price.toFixed(2)}</p>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <button onclick="changeQuantity(${index}, -1)" class="w-8 h-8 bg-white border border-slate-200 rounded-xl font-bold text-slate-700 flex items-center justify-center hover:bg-slate-100 transition">-</button>
+                                <span class="font-bold text-sm">${item.quantity}</span>
+                                <button onclick="changeQuantity(${index}, 1)" class="w-8 h-8 bg-white border border-slate-200 rounded-xl font-bold text-slate-700 flex items-center justify-center hover:bg-slate-100 transition">+</button>
+                            </div>
+                        </div>
+                    `;
+                });
+            }
+
+            cartCount.textContent = totalCount;
+            cartTotal.textContent = `$${totalPrice.toFixed(2)}`;
+        }
+
+        function changeQuantity(index, change) {
+            cart[index].quantity += change;
+            if (cart[index].quantity <= 0) {
+                cart.splice(index, 1);
+            }
+            updateCartUI();
+        }
+
+        // WhatsApp Checkout Notification
+        function checkoutWhatsApp() {
+            if (cart.length === 0) {
+                alert('Your cart is empty!');
+                return;
+            }
+            let message = "Hello Slice & Spice, I would like to place an order:%0A";
+            let total = 0;
+            cart.forEach(item => {
+                message += `- ${item.quantity}x ${item.name} ($${(item.price * item.quantity).toFixed(2)})%0A`;
+                total += item.price * item.quantity;
+            });
+            message += `%0ATotal Amount: $${total.toFixed(2)}`;
+
+            const whatsappUrl = `https://wa.me/233539847422?text=${message}`;
+            window.open(whatsappUrl, '_blank');
+        }
+
+        // WhatsApp Appointment Booking Notification
+        function bookAppointment(e) {
+            e.preventDefault();
+            const name = document.getElementById('book-name').value;
+            const phone = document.getElementById('book-phone').value;
+            const date = document.getElementById('book-date').value;
+            const time = document.getElementById('book-time').value;
+            const notes = document.getElementById('book-notes').value;
+
+            const message = `Hello Slice & Spice, I would like to book a table/appointment:%0A` +
+                            `- Name: ${name}%0A` +
+                            `- Phone: ${phone}%0A` +
+                            `- Date: ${date}%0A` +
+                            `- Time: ${time}%0A` +
+                            `- Notes: ${notes}`;
+
+            const whatsappUrl = `https://wa.me/233539847422?text=${message}`;
+            window.open(whatsappUrl, '_blank');
+        }
+
+        // WhatsApp Contact Message Notification
+        function sendContactMessage(e) {
+            e.preventDefault();
+            const name = document.getElementById('contact-name').value;
+            const email = document.getElementById('contact-email').value;
+            const msg = document.getElementById('contact-msg').value;
+
+            const whatsappMessage = `Hello Slice & Spice, I have a new message from your website contact form:%0A` +
+                                    `- Name: ${name}%0A` +
+                                    `- Email: ${email}%0A` +
+                                    `- Message: ${msg}`;
+
+            const whatsappUrl = `https://wa.me/233539847422?text=${whatsappMessage}`;
+            window.open(whatsappUrl, '_blank');
+            
+            e.target.reset();
+        }
+    </script>
+</body>
+</html>
