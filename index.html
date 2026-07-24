@@ -62,8 +62,8 @@
                             <i class="fa-solid fa-chevron-down text-xs"></i>
                         </button>
                         <div id="team-dropdown" class="hidden absolute top-full left-0 w-48 bg-white rounded-2xl shadow-xl border border-slate-100 py-3 space-y-1 z-50">
-                            <a href="#chief-chef-section" onclick="showChiefChefSection()" class="block px-4 py-2 text-slate-700 hover:bg-red-50 hover:text-red-600 transition font-semibold">Chief Chef</a>
-                            <a href="#our-staff-section" onclick="showStaffSection()" class="block px-4 py-2 text-slate-700 hover:bg-red-50 hover:text-red-600 transition font-semibold">Our Staff</a>
+                            <a href="#chief-chef-section" class="block px-4 py-2 text-slate-700 hover:bg-red-50 hover:text-red-600 transition font-semibold">Chief Chef</a>
+                            <a href="#our-staff-section" class="block px-4 py-2 text-slate-700 hover:bg-red-50 hover:text-red-600 transition font-semibold">Our Staff</a>
                         </div>
                     </div>
 
@@ -102,8 +102,8 @@
                     <i class="fa-solid fa-chevron-down text-xs"></i>
                 </button>
                 <div id="mobile-team-dropdown" class="hidden pl-4 py-2 space-y-2">
-                    <a href="#chief-chef-section" onclick="toggleMobileMenu(); showChiefChefSection();" class="block text-slate-600 hover:text-red-600 font-medium">Chief Chef</a>
-                    <a href="#our-staff-section" onclick="toggleMobileMenu(); showStaffSection();" class="block text-slate-600 hover:text-red-600 font-medium">Our Staff</a>
+                    <a href="#chief-chef-section" onclick="toggleMobileMenu()" class="block text-slate-600 hover:text-red-600 font-medium">Chief Chef</a>
+                    <a href="#our-staff-section" onclick="toggleMobileMenu()" class="block text-slate-600 hover:text-red-600 font-medium">Our Staff</a>
                 </div>
             </div>
             <a href="#hours" onclick="toggleMobileMenu()" class="block text-slate-700 hover:text-red-600 font-semibold">Hours</a>
@@ -397,6 +397,79 @@
         </div>
     </section>
 
+    <!-- CHIEF CHEF SECTION -->
+    <section id="chief-chef-section" class="py-24 px-4 max-w-7xl mx-auto">
+        <div class="text-center mb-16">
+            <span class="text-red-600 font-extrabold text-sm tracking-widest uppercase mb-2 block">Culinary Leadership</span>
+            <h2 class="text-3xl sm:text-5xl font-black text-slate-900 mb-4 tracking-tight">Meet Our Chief Chef</h2>
+            <p class="text-slate-500 max-w-xl mx-auto text-base">The creative mastermind behind our signature woodfired pizzas and smoky jollof recipes.</p>
+        </div>
+
+        <div class="bg-white rounded-[3rem] shadow-xl border border-slate-100 overflow-hidden max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 items-center">
+            <div class="h-80 md:h-full relative">
+                <img src="https://images.unsplash.com/photo-1577219491135-ce391730fb2c?auto=format&fit=crop&w=800&q=80" alt="Chief Chef" class="w-full h-full object-cover">
+            </div>
+            <div class="p-8 sm:p-12">
+                <span class="bg-red-50 text-red-600 text-xs font-bold uppercase tracking-wider px-3 py-1.5 rounded-xl inline-block mb-4">Executive Chef</span>
+                <h3 class="text-3xl font-black text-slate-900 mb-2">Chef Marcus Vance</h3>
+                <p class="text-slate-600 leading-relaxed mb-6">With over 15 years of international culinary experience, Chef Marcus brings passion, precision, and authentic flavor profiles to every single plate served at Slice & Spice.</p>
+                <div class="flex space-x-3 text-red-600">
+                    <div class="w-10 h-10 bg-red-50 rounded-xl flex items-center justify-center font-bold"><i class="fa-solid fa-award"></i></div>
+                    <div class="w-10 h-10 bg-red-50 rounded-xl flex items-center justify-center font-bold"><i class="fa-solid fa-fire"></i></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- OUR STAFF SECTION (ADDED / FIXED) -->
+    <section id="our-staff-section" class="bg-white py-24 px-4 border-y border-slate-100">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <span class="text-red-600 font-extrabold text-sm tracking-widest uppercase mb-2 block">The Dream Team</span>
+                <h2 class="text-3xl sm:text-5xl font-black text-slate-900 mb-4 tracking-tight">Meet Our Staff</h2>
+                <p class="text-slate-500 max-w-xl mx-auto text-base">The dedicated professionals ensuring your dining and ordering experience is seamless and delightful.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Staff Card 1 -->
+                <div class="bg-slate-50 rounded-3xl p-6 border border-slate-100 shadow-sm hover:shadow-xl transition duration-300 text-center flex flex-col justify-between group">
+                    <div class="relative overflow-hidden rounded-2xl h-72 mb-6">
+                        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80" alt="Staff Member" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-1">Sarah Mensah</h3>
+                        <p class="text-red-600 font-semibold text-sm mb-3">Head Customer Relations</p>
+                        <p class="text-slate-500 text-sm leading-relaxed mb-6">Sarah coordinates all reservations, customer inquiries, and ensures every guest leaves with a smile.</p>
+                    </div>
+                </div>
+
+                <!-- Staff Card 2 -->
+                <div class="bg-slate-50 rounded-3xl p-6 border border-slate-100 shadow-sm hover:shadow-xl transition duration-300 text-center flex flex-col justify-between group">
+                    <div class="relative overflow-hidden rounded-2xl h-72 mb-6">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=600&q=80" alt="Staff Member" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-1">Kofi Boateng</h3>
+                        <p class="text-red-600 font-semibold text-sm mb-3">Master Pizza Artisan</p>
+                        <p class="text-slate-500 text-sm leading-relaxed mb-6">Expert in woodfired dough preparation and custom gourmet pizza baking.</p>
+                    </div>
+                </div>
+
+                <!-- Staff Card 3 -->
+                <div class="bg-slate-50 rounded-3xl p-6 border border-slate-100 shadow-sm hover:shadow-xl transition duration-300 text-center flex flex-col justify-between group">
+                    <div class="relative overflow-hidden rounded-2xl h-72 mb-6">
+                        <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=600&q=80" alt="Staff Member" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-1">Abena Osei</h3>
+                        <p class="text-red-600 font-semibold text-sm mb-3">Logistics & Delivery Lead</p>
+                        <p class="text-slate-500 text-sm leading-relaxed mb-6">Manages prompt WhatsApp order dispatches to ensure your food arrives piping hot.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- HOURS SECTION -->
     <section id="hours" class="py-24 px-4 max-w-4xl mx-auto">
         <div class="bg-white rounded-[2.5rem] shadow-xl border border-slate-100 p-8 sm:p-14 text-center">
@@ -443,7 +516,7 @@
         </div>
     </section>
 
-    <!-- CONTACT SECTION (ADDED) -->
+    <!-- CONTACT SECTION -->
     <section id="contact" class="py-24 px-4 max-w-7xl mx-auto">
         <div class="text-center mb-16">
             <span class="text-red-600 font-extrabold text-sm tracking-widest uppercase mb-2 block">Get in Touch</span>
@@ -452,7 +525,6 @@
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <!-- Phone Support -->
             <div class="bg-white rounded-3xl p-8 shadow-sm border border-slate-100 text-center hover:shadow-xl transition">
                 <div class="w-16 h-16 bg-red-50 text-red-600 rounded-2xl flex items-center justify-center mx-auto mb-6 text-2xl">
                     <i class="fa-solid fa-phone"></i>
@@ -462,17 +534,15 @@
                 <a href="tel:0539847422" class="text-red-600 font-bold hover:underline">053 984 7422</a>
             </div>
 
-            <!-- WhatsApp Inquiries -->
             <div class="bg-white rounded-3xl p-8 shadow-sm border border-slate-100 text-center hover:shadow-xl transition">
                 <div class="w-16 h-16 bg-green-50 text-green-600 rounded-2xl flex items-center justify-center mx-auto mb-6 text-2xl">
                     <i class="fa-brands fa-whatsapp"></i>
                 </div>
                 <h3 class="text-xl font-bold text-slate-900 mb-2">WhatsApp Chat</h3>
                 <p class="text-slate-500 text-sm mb-4">Chat with our customer service team on WhatsApp.</p>
-                <a href="https://wa.me/233539847422" target="_blank" class="text-green-600 font-bold hover:underline">Chat on WhatsApp</a>
+                <a href="url?id=9" target="_blank" class="text-green-600 font-bold hover:underline">Chat on WhatsApp</a>
             </div>
 
-            <!-- Email Support -->
             <div class="bg-white rounded-3xl p-8 shadow-sm border border-slate-100 text-center hover:shadow-xl transition">
                 <div class="w-16 h-16 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-6 text-2xl">
                     <i class="fa-solid fa-envelope"></i>
