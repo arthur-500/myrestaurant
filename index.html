@@ -443,8 +443,49 @@
         </div>
     </section>
 
+    <!-- CONTACT SECTION (ADDED) -->
+    <section id="contact" class="py-24 px-4 max-w-7xl mx-auto">
+        <div class="text-center mb-16">
+            <span class="text-red-600 font-extrabold text-sm tracking-widest uppercase mb-2 block">Get in Touch</span>
+            <h2 class="text-3xl sm:text-5xl font-black text-slate-900 mb-4 tracking-tight">Contact Us</h2>
+            <p class="text-slate-500 max-w-xl mx-auto text-base">Have questions, feedback, or inquiries? Reach out to us through any of the channels below.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Phone Support -->
+            <div class="bg-white rounded-3xl p-8 shadow-sm border border-slate-100 text-center hover:shadow-xl transition">
+                <div class="w-16 h-16 bg-red-50 text-red-600 rounded-2xl flex items-center justify-center mx-auto mb-6 text-2xl">
+                    <i class="fa-solid fa-phone"></i>
+                </div>
+                <h3 class="text-xl font-bold text-slate-900 mb-2">Phone Support</h3>
+                <p class="text-slate-500 text-sm mb-4">Call us directly for instant inquiries and quick orders.</p>
+                <a href="tel:0539847422" class="text-red-600 font-bold hover:underline">053 984 7422</a>
+            </div>
+
+            <!-- WhatsApp Inquiries -->
+            <div class="bg-white rounded-3xl p-8 shadow-sm border border-slate-100 text-center hover:shadow-xl transition">
+                <div class="w-16 h-16 bg-green-50 text-green-600 rounded-2xl flex items-center justify-center mx-auto mb-6 text-2xl">
+                    <i class="fa-brands fa-whatsapp"></i>
+                </div>
+                <h3 class="text-xl font-bold text-slate-900 mb-2">WhatsApp Chat</h3>
+                <p class="text-slate-500 text-sm mb-4">Chat with our customer service team on WhatsApp.</p>
+                <a href="https://wa.me/233539847422" target="_blank" class="text-green-600 font-bold hover:underline">Chat on WhatsApp</a>
+            </div>
+
+            <!-- Email Support -->
+            <div class="bg-white rounded-3xl p-8 shadow-sm border border-slate-100 text-center hover:shadow-xl transition">
+                <div class="w-16 h-16 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-6 text-2xl">
+                    <i class="fa-solid fa-envelope"></i>
+                </div>
+                <h3 class="text-xl font-bold text-slate-900 mb-2">Email Address</h3>
+                <p class="text-slate-500 text-sm mb-4">Send us an email for general or corporate questions.</p>
+                <a href="mailto:support@sliceandspice.com" class="text-blue-600 font-bold hover:underline">support@sliceandspice.com</a>
+            </div>
+        </div>
+    </section>
+
     <!-- BOOK APPOINTMENT / TABLE SECTION -->
-    <section id="booking" class="py-24 px-4 max-w-4xl mx-auto">
+    <section id="booking" class="py-24 px-4 max-w-4xl mx-auto bg-slate-100 rounded-[3rem]">
         <div class="bg-white rounded-[2.5rem] shadow-xl border border-slate-100 p-8 sm:p-14">
             <div class="text-center mb-12">
                 <span class="text-red-600 font-extrabold text-sm tracking-widest uppercase mb-2 block">Reservations</span>
@@ -565,7 +606,6 @@
         }
 
         function addToCart(name, price) {
-            // Strict full price recording with zero discounts
             const exactPrice = parseFloat(price);
             const existingItem = cart.find(item => item.name === name && item.price === exactPrice);
             if (existingItem) {
