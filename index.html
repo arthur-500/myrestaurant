@@ -166,7 +166,7 @@
                                         <option value="Large" data-price="22.00">Large ($22.00)</option>
                                     </select>
                                 </div>
-                                <button onclick="addPizzaToCart('Classic Pepperoni Pizza', 'pizza-1-size')" class="w-full bg-slate-900 hover:bg-red-600 text-white font-bold py-3.5 rounded-2xl transition duration-200 shadow-sm flex items-center justify-center space-x-2">
+                                <button onclick="addCustomToCart('Classic Pepperoni Pizza', 'pizza-1-size')" class="w-full bg-slate-900 hover:bg-red-600 text-white font-bold py-3.5 rounded-2xl transition duration-200 shadow-sm flex items-center justify-center space-x-2">
                                     <i class="fa-solid fa-plus text-xs"></i>
                                     <span>Add to Cart</span>
                                 </button>
@@ -194,7 +194,7 @@
                                         <option value="Large" data-price="18.00">Large ($18.00)</option>
                                     </select>
                                 </div>
-                                <button onclick="addPizzaToCart('Margherita Pizza', 'pizza-2-size')" class="w-full bg-slate-900 hover:bg-red-600 text-white font-bold py-3.5 rounded-2xl transition duration-200 shadow-sm flex items-center justify-center space-x-2">
+                                <button onclick="addCustomToCart('Margherita Pizza', 'pizza-2-size')" class="w-full bg-slate-900 hover:bg-red-600 text-white font-bold py-3.5 rounded-2xl transition duration-200 shadow-sm flex items-center justify-center space-x-2">
                                     <i class="fa-solid fa-plus text-xs"></i>
                                     <span>Add to Cart</span>
                                 </button>
@@ -222,7 +222,7 @@
                                         <option value="Large" data-price="24.00">Large ($24.00)</option>
                                     </select>
                                 </div>
-                                <button onclick="addPizzaToCart('BBQ Chicken Pizza', 'pizza-3-size')" class="w-full bg-slate-900 hover:bg-red-600 text-white font-bold py-3.5 rounded-2xl transition duration-200 shadow-sm flex items-center justify-center space-x-2">
+                                <button onclick="addCustomToCart('BBQ Chicken Pizza', 'pizza-3-size')" class="w-full bg-slate-900 hover:bg-red-600 text-white font-bold py-3.5 rounded-2xl transition duration-200 shadow-sm flex items-center justify-center space-x-2">
                                     <i class="fa-solid fa-plus text-xs"></i>
                                     <span>Add to Cart</span>
                                 </button>
@@ -259,7 +259,7 @@
                                         <option value="Family Bowl" data-price="28.00">Family Bowl ($28.00)</option>
                                     </select>
                                 </div>
-                                <button onclick="addJollofToCart('Signature Smoky Jollof', 'jollof-1-size')" class="w-full bg-slate-900 hover:bg-red-600 text-white font-bold py-3.5 rounded-2xl transition duration-200 shadow-sm flex items-center justify-center space-x-2">
+                                <button onclick="addCustomToCart('Signature Smoky Party Jollof', 'jollof-1-size')" class="w-full bg-slate-900 hover:bg-red-600 text-white font-bold py-3.5 rounded-2xl transition duration-200 shadow-sm flex items-center justify-center space-x-2">
                                     <i class="fa-solid fa-plus text-xs"></i>
                                     <span>Add to Cart</span>
                                 </button>
@@ -287,7 +287,7 @@
                                         <option value="Family Bowl" data-price="32.00">Family Bowl ($32.00)</option>
                                     </select>
                                 </div>
-                                <button onclick="addJollofToCart('Jollof with Beef & Salad', 'jollof-2-size')" class="w-full bg-slate-900 hover:bg-red-600 text-white font-bold py-3.5 rounded-2xl transition duration-200 shadow-sm flex items-center justify-center space-x-2">
+                                <button onclick="addCustomToCart('Jollof with Beef & Salad', 'jollof-2-size')" class="w-full bg-slate-900 hover:bg-red-600 text-white font-bold py-3.5 rounded-2xl transition duration-200 shadow-sm flex items-center justify-center space-x-2">
                                     <i class="fa-solid fa-plus text-xs"></i>
                                     <span>Add to Cart</span>
                                 </button>
@@ -310,7 +310,7 @@
                             <h5 class="font-bold text-slate-900 text-sm mb-1">Coca Cola</h5>
                             <span class="text-red-600 font-extrabold text-sm">$2.50</span>
                         </div>
-                        <button onclick="addToCart('Coca Cola', 2.50)" class="mt-5 w-full bg-slate-100 hover:bg-red-600 hover:text-white text-slate-700 text-xs font-bold py-2.5 rounded-xl transition">Add</button>
+                        <button onclick="addToCart('Coca Cola', 'Standard', 2.50)" class="mt-5 w-full bg-slate-100 hover:bg-red-600 hover:text-white text-slate-700 text-xs font-bold py-2.5 rounded-xl transition">Add</button>
                     </div>
 
                     <div class="bg-white rounded-3xl shadow-sm border border-slate-100 hover:shadow-md p-5 text-center flex flex-col justify-between group transition">
@@ -319,7 +319,7 @@
                             <h5 class="font-bold text-slate-900 text-sm mb-1">Mirinda</h5>
                             <span class="text-red-600 font-extrabold text-sm">$2.50</span>
                         </div>
-                        <button onclick="addToCart('Mirinda', 2.50)" class="mt-5 w-full bg-slate-100 hover:bg-red-600 hover:text-white text-slate-700 text-xs font-bold py-2.5 rounded-xl transition">Add</button>
+                        <button onclick="addToCart('Mirinda', 'Standard', 2.50)" class="mt-5 w-full bg-slate-100 hover:bg-red-600 hover:text-white text-slate-700 text-xs font-bold py-2.5 rounded-xl transition">Add</button>
                     </div>
 
                     <div class="bg-white rounded-3xl shadow-sm border border-slate-100 hover:shadow-md p-5 text-center flex flex-col justify-between group transition">
@@ -328,7 +328,7 @@
                             <h5 class="font-bold text-slate-900 text-sm mb-1">Fanta</h5>
                             <span class="text-red-600 font-extrabold text-sm">$2.50</span>
                         </div>
-                        <button onclick="addToCart('Fanta', 2.50)" class="mt-5 w-full bg-slate-100 hover:bg-red-600 hover:text-white text-slate-700 text-xs font-bold py-2.5 rounded-xl transition">Add</button>
+                        <button onclick="addToCart('Fanta', 'Standard', 2.50)" class="mt-5 w-full bg-slate-100 hover:bg-red-600 hover:text-white text-slate-700 text-xs font-bold py-2.5 rounded-xl transition">Add</button>
                     </div>
 
                     <div class="bg-white rounded-3xl shadow-sm border border-slate-100 hover:shadow-md p-5 text-center flex flex-col justify-between group transition">
@@ -337,7 +337,7 @@
                             <h5 class="font-bold text-slate-900 text-sm mb-1">Sprite</h5>
                             <span class="text-red-600 font-extrabold text-sm">$2.50</span>
                         </div>
-                        <button onclick="addToCart('Sprite', 2.50)" class="mt-5 w-full bg-slate-100 hover:bg-red-600 hover:text-white text-slate-700 text-xs font-bold py-2.5 rounded-xl transition">Add</button>
+                        <button onclick="addToCart('Sprite', 'Standard', 2.50)" class="mt-5 w-full bg-slate-100 hover:bg-red-600 hover:text-white text-slate-700 text-xs font-bold py-2.5 rounded-xl transition">Add</button>
                     </div>
 
                     <div class="bg-white rounded-3xl shadow-sm border border-slate-100 hover:shadow-md p-5 text-center flex flex-col justify-between group transition">
@@ -346,7 +346,7 @@
                             <h5 class="font-bold text-slate-900 text-sm mb-1">Alvaro</h5>
                             <span class="text-red-600 font-extrabold text-sm">$2.50</span>
                         </div>
-                        <button onclick="addToCart('Alvaro', 2.50)" class="mt-5 w-full bg-slate-100 hover:bg-red-600 hover:text-white text-slate-700 text-xs font-bold py-2.5 rounded-xl transition">Add</button>
+                        <button onclick="addToCart('Alvaro', 'Standard', 2.50)" class="mt-5 w-full bg-slate-100 hover:bg-red-600 hover:text-white text-slate-700 text-xs font-bold py-2.5 rounded-xl transition">Add</button>
                     </div>
 
                     <div class="bg-white rounded-3xl shadow-sm border border-slate-100 hover:shadow-md p-5 text-center flex flex-col justify-between group transition">
@@ -355,7 +355,7 @@
                             <h5 class="font-bold text-slate-900 text-sm mb-1">Punch</h5>
                             <span class="text-red-600 font-extrabold text-sm">$2.50</span>
                         </div>
-                        <button onclick="addToCart('Punch', 2.50)" class="mt-5 w-full bg-slate-100 hover:bg-red-600 hover:text-white text-slate-700 text-xs font-bold py-2.5 rounded-xl transition">Add</button>
+                        <button onclick="addToCart('Punch', 'Standard', 2.50)" class="mt-5 w-full bg-slate-100 hover:bg-red-600 hover:text-white text-slate-700 text-xs font-bold py-2.5 rounded-xl transition">Add</button>
                     </div>
 
                     <div class="bg-white rounded-3xl shadow-sm border border-slate-100 hover:shadow-md p-5 text-center flex flex-col justify-between group transition">
@@ -364,7 +364,7 @@
                             <h5 class="font-bold text-slate-900 text-sm mb-1">Mineral Water</h5>
                             <span class="text-red-600 font-extrabold text-sm">$1.50</span>
                         </div>
-                        <button onclick="addToCart('Mineral Water', 1.50)" class="mt-5 w-full bg-slate-100 hover:bg-red-600 hover:text-white text-slate-700 text-xs font-bold py-2.5 rounded-xl transition">Add</button>
+                        <button onclick="addToCart('Mineral Water', 'Standard', 1.50)" class="mt-5 w-full bg-slate-100 hover:bg-red-600 hover:text-white text-slate-700 text-xs font-bold py-2.5 rounded-xl transition">Add</button>
                     </div>
                 </div>
             </div>
@@ -421,7 +421,7 @@
         </div>
     </section>
 
-    <!-- OUR STAFF SECTION (ADDED / FIXED) -->
+    <!-- OUR STAFF SECTION -->
     <section id="our-staff-section" class="bg-white py-24 px-4 border-y border-slate-100">
         <div class="max-w-7xl mx-auto">
             <div class="text-center mb-16">
@@ -540,7 +540,7 @@
                 </div>
                 <h3 class="text-xl font-bold text-slate-900 mb-2">WhatsApp Chat</h3>
                 <p class="text-slate-500 text-sm mb-4">Chat with our customer service team on WhatsApp.</p>
-                <a href="url?id=9" target="_blank" class="text-green-600 font-bold hover:underline">Chat on WhatsApp</a>
+                <a href="https://wa.me/233539847422" target="_blank" class="text-green-600 font-bold hover:underline">Chat on WhatsApp</a>
             </div>
 
             <div class="bg-white rounded-3xl p-8 shadow-sm border border-slate-100 text-center hover:shadow-xl transition">
@@ -618,7 +618,7 @@
             <div class="flex justify-between items-center border-b border-slate-100 pb-5">
                 <div class="flex items-center space-x-2">
                     <i class="fa-solid fa-cart-shopping text-red-600"></i>
-                    <h3 class="text-xl font-black text-slate-900 tracking-tight">Your Cart (No Discounts)</h3>
+                    <h3 class="text-xl font-black text-slate-900 tracking-tight">Your Cart</h3>
                 </div>
                 <button onclick="toggleCart()" class="w-10 h-10 bg-slate-100 hover:bg-slate-200 rounded-full flex items-center justify-center text-slate-600 font-bold transition">&times;</button>
             </div>
@@ -638,7 +638,7 @@
         </div>
     </div>
 
-    <!-- JAVASCRIPT LOGIC WITH NO DISCOUNT ENFORCEMENT -->
+    <!-- JAVASCRIPT LOGIC -->
     <script>
         let currentSlide = 0;
         const slides = document.querySelectorAll('.hero-slide');
@@ -668,42 +668,32 @@
             }
         });
 
-        // Cart Data Structure
+        // Cart Data Structure storing separate name, size, unit price, and quantity
         let cart = [];
 
         function toggleCart() {
             document.getElementById('cart-modal').classList.toggle('hidden');
         }
 
-        function addToCart(name, price) {
+        function addToCart(name, size, price) {
             const exactPrice = parseFloat(price);
-            const existingItem = cart.find(item => item.name === name && item.price === exactPrice);
+            const existingItem = cart.find(item => item.name === name && item.size === size && item.price === exactPrice);
+            
             if (existingItem) {
                 existingItem.quantity += 1;
             } else {
-                cart.push({ name, price: exactPrice, quantity: 1 });
+                cart.push({ name, size, price: exactPrice, quantity: 1 });
             }
             updateCartUI();
         }
 
-        function addPizzaToCart(pizzaName, selectId) {
+        function addCustomToCart(itemName, selectId) {
             const selectElement = document.getElementById(selectId);
             const selectedOption = selectElement.options[selectElement.selectedIndex];
             const size = selectedOption.value;
             const price = parseFloat(selectedOption.getAttribute('data-price'));
             
-            const fullName = `${pizzaName} (${size})`;
-            addToCart(fullName, price);
-        }
-
-        function addJollofToCart(jollofName, selectId) {
-            const selectElement = document.getElementById(selectId);
-            const selectedOption = selectElement.options[selectElement.selectedIndex];
-            const size = selectedOption.value;
-            const price = parseFloat(selectedOption.getAttribute('data-price'));
-            
-            const fullName = `${jollofName} - ${size}`;
-            addToCart(fullName, price);
+            addToCart(itemName, size, price);
         }
 
         function updateCartUI() {
@@ -725,7 +715,7 @@
                     cartItemsContainer.innerHTML += `
                         <div class="flex justify-between items-center bg-slate-50 p-4 rounded-2xl border border-slate-100">
                             <div>
-                                <h4 class="font-bold text-slate-900 text-sm mb-0.5">${item.name}</h4>
+                                <h4 class="font-bold text-slate-900 text-sm mb-0.5">${item.name} (${item.size})</h4>
                                 <p class="text-xs font-semibold text-red-600">$${item.price.toFixed(2)} each</p>
                             </div>
                             <div class="flex items-center space-x-3">
@@ -755,13 +745,28 @@
                 alert('Your cart is empty!');
                 return;
             }
-            let message = "Hello Slice & Spice, I am placing an order (No discounts applied):%0A";
+
+            // Nice greeting message header
+            let message = "Hello Slice & Spice! 👋😊%0A";
+            message += "I would like to place an order for the following items:%0A%0A";
+            
             let total = 0;
-            cart.forEach(item => {
-                message += `- ${item.quantity}x ${item.name} at $${item.price.toFixed(2)} = $${(item.price * item.quantity).toFixed(2)}%0A`;
-                total += item.price * item.quantity;
+            
+            // Appending product name, size, unit price, quantity, and total for each item
+            cart.forEach((item, index) => {
+                let itemTotal = item.price * item.quantity;
+                total += itemTotal;
+                message += `${index + 1}. *${item.name}*%0A`;
+                message += `   - Size: ${item.size}%0A`;
+                message += `   - Unit Price: $${item.price.toFixed(2)}%0A`;
+                message += `   - Quantity: ${item.quantity}%0A`;
+                message += `   - Subtotal: $${itemTotal.toFixed(2)}%0A%0A`;
             });
-            message += `%0ATotal Amount Payable: $${total.toFixed(2)}`;
+
+            // Grand Total and nice closing message
+            message += `-----------------------------------%0A`;
+            message += `*Grand Total: $${total.toFixed(2)}*%0A%0A`;
+            message += "Thank you! Please let me know the confirmation and delivery details. Looking forward to my delicious meal! 🍕✨";
 
             const whatsappUrl = `https://wa.me/233539847422?text=${message}`;
             window.open(whatsappUrl, '_blank');
